@@ -5,14 +5,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div class="container">
         <h1>To-Do List</h1>
-        <input type="text" id="taskInput" placeholder="Zadaj úlohu...">
-        <button id="addTaskBtn">Pridať úlohu</button>
+
+        <h2>Pridaj novú úlohu</h2>
+        <input id="taskInput" placeholder="Zadaj úlohu..." />
+        <button id="addTask">Pridať úlohu</button>
+
+        <h2>Zoznam úloh</h2>
         <ul id="taskList"></ul>
+
+        <h2>Možnosti</h2>
+        <button id="clearTasks">Vymazať všetky úlohy</button>
+        <button id="filterCompleted">Zobraziť dokončené úlohy</button>
+        <button id="filterIncomplete">Zobraziť nedokončené úlohy</button>
     </div>
-    <script src="script.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+            const renderTasks = () => {
+                $('#taskList').empty();
+                tasks.forEach((task, index) => {
+                    $('#taskList').append(`<li>${task} <button class="removeTask" data-index="${index}">X</button></li>`);
+                });
+            };
+
+            renderTasks();
+
+            $('#addTask').click(function() {
+                const taskInput = $('#taskInput').val().trim();
+                if (taskInput) {
+                    tasks.push(taskInput);
+                    $('#taskInput').val('');
+                    localStorage.setItem('tasks', JSON.stringify(tasks));
+                    renderTasks();
+                } else {
+                    alert("Prosím, zadajte platnú úlohu.");
+                }
+            });
+
+            $(document).on('click', '.removeTask', function() {
+                const index = $(this).data('index');
+                tasks.splice(index, 1);
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+                renderTasks();
+            });
+
+            // Funkcia na vymazanie všetkých úloh
+            $('#clearTasks').click(function() {
+                tasks = [];
+                localStorage.removeItem('tasks'); // Vymazanie localStorage
+                renderTasks();
+            });
+
+            // Funkcia na filtrovanie dokončených úloh
+            $('#filterCompleted').click(function() {
+                const completedTasks = tasks.filter(task => task.completed); // Tu predpokladám, že máš pole s informáciami o dokončení úlohy
+                $('#taskList').empty();
+                completedTasks.forEach((task, index) => {
+                    $('#taskList').append(`<li>${task} <button class="removeTask" data-index="${index}">X</button></li>`);
+                });
+            });
+
+            // Funkcia na filtrovanie nedokončených úloh
+            $('#filterIncomplete').click(function() {
+                const incompleteTasks = tasks.filter(task => !task.completed); // A tu tiež
+                $('#taskList').empty();
+                incompleteTasks.forEach((task, index) => {
+                    $('#taskList').append(`<li>${task} <button class="removeTask" data-index="${index}">X</button></li>`);
+                });
+            });
+        });
+    </script>
 </body>
 </html>

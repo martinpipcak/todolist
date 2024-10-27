@@ -1,0 +1,97 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-size: 16px; /* Zlepšuje čitateľnosť */
+}
+
+.container {
+    background-color: #fff;
+    padding: 30px; /* Viac priestoru okolo obsahu */
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    width: 350px; /* Širší container */
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 24px; /* Väčšie písmo */
+}
+
+input {
+    width: calc(100% - 22px);
+    padding: 12px; /* Viac priestoru v inpute */
+    margin-bottom: 15px; /* Väčší priestor pod inputom */
+    border: 2px solid #ddd; /* Rádius a farba */
+    border-radius: 5px;
+    font-size: 16px; /* Väčšie písmo pre lepšiu čitateľnosť */
+    transition: border-color 0.3s; /* Animácia pri zaostrení */
+}
+
+input:focus {
+    border-color: #28a745; /* Zmena farby rádu pri zaostrení */
+    outline: none; /* Odstránenie predvoleného zaostrenia */
+}
+
+button {
+    width: 100%;
+    padding: 12px; /* Viac priestoru v tlačidle */
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px; /* Väčšie písmo */
+    transition: background-color 0.3s, transform 0.2s; /* Animácie */
+}
+
+button:hover {
+    background-color: #218838; /* Tmavšia farba pri prechode myšou */
+    transform: translateY(-2px); /* Malý pohyb nahor pre efekt */
+}
+
+ul {
+    list-style-type: none;
+    margin-top: 20px;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Zarovnanie vertikálne */
+    padding: 12px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s; /* Animácia pre zmenu pozadia */
+}
+
+li:hover {
+    background-color: #f1f1f1; /* Zmena farby pozadia pri prechode myšou */
+}
+
+.removeTask {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 6px 10px; /* Viac priestoru v tlačidle na odstránenie */
+    transition: background-color 0.3s; /* Animácia */
+}
+
+.removeTask:hover {
+    background-color: #c82333; /* Tmavšia farba pri prechode myšou */
+}
